@@ -33,7 +33,7 @@ class Node extends libp2p {
         }, options)
 
         const defaults = {
-            modules: {
+            modules: Object.assign({
                 transport: [
                     TCP,
                     WS
@@ -49,9 +49,9 @@ class Node extends libp2p {
                     MulticastDNS
                 ],
                 dht: DHT
-            },
+            }, options.modules),
 
-            config: {
+            config: Object.assign({
                 peerDiscovery: {
                     mdns: options.multicastDNS || {enabled: false},
                     bootstrap: {
@@ -62,10 +62,9 @@ class Node extends libp2p {
                 },
                 dht: {
                     kBucketSize: 20,
-                    // enabled: true,
                     enabledDiscovery: true
-                },
-            }
+                }
+            }, options.config)
         }
 
         const peerBook = new PeerBook()
