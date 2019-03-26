@@ -10,7 +10,7 @@ const uuid = require('uuid')
 
 const MulticastDNS = require('libp2p-mdns')
 const DHT = require('libp2p-kad-dht')
-const Railing = require('libp2p-railing')
+const Bootstrap = require('libp2p-bootstrap')
 const PeerInfo = require('peer-info')
 const Pushable = require('pull-pushable')
 const PeerBook = require('peer-book')
@@ -45,7 +45,7 @@ class Node extends libp2p {
                     secio
                 ],
                 peerDiscovery: [
-                    Railing,
+                    Bootstrap,
                     MulticastDNS
                 ],
                 dht: DHT
@@ -66,6 +66,7 @@ class Node extends libp2p {
                 }
             }, options.config)
         }
+
 
         const peerBook = new PeerBook()
 
